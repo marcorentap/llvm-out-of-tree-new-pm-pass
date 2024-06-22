@@ -4,7 +4,7 @@
 
 namespace llvm {
 
-class FunctionNamePass : public PassInfoMixin<FunctionNamePass> {
+class PrintFunctionNamePass : public PassInfoMixin<PrintFunctionNamePass> {
 public:
   char ID;
   PreservedAnalyses run(Function &F, FunctionAnalysisManager &FAM) {
@@ -14,12 +14,12 @@ public:
 };
 
 extern "C" PassPluginLibraryInfo llvmGetPassPluginInfo() {
-  return {LLVM_PLUGIN_API_VERSION, "FunctionNamePass", "V0.1",
+  return {LLVM_PLUGIN_API_VERSION, "PrintFunctionName", "V0.1",
           [](PassBuilder &PB) {
             PB.registerPipelineParsingCallback(
                 [](StringRef passName, FunctionPassManager &FPM, ...) {
-                  if (passName == "function-name-pass") {
-                    FPM.addPass(FunctionNamePass());
+                  if (passName == "print-function-name") {
+                    FPM.addPass(PrintFunctionNamePass());
                     return true;
                   }
                   return false;

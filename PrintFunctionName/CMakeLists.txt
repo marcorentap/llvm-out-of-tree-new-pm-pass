@@ -1,0 +1,1 @@
+add_library(PrintFunctionName MODULE PrintFunctionName.cpp)
